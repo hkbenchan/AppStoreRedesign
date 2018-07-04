@@ -9,21 +9,27 @@
 /* Begin PBXBuildFile section */
 		0BCC670D938282CEDAFCB920 /* Pods_AppStoreRedesign.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 88D2F33C0B71D57373BCCF72 /* Pods_AppStoreRedesign.framework */; };
 		7733474520ED42D70098C105 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7733474420ED42D70098C105 /* AppDelegate.swift */; };
-		7733474720ED42D70098C105 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7733474620ED42D70098C105 /* ViewController.swift */; };
 		7733474A20ED42D70098C105 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7733474820ED42D70098C105 /* Main.storyboard */; };
 		7733474C20ED42D80098C105 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7733474B20ED42D80098C105 /* Assets.xcassets */; };
 		7733474F20ED42D80098C105 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7733474D20ED42D80098C105 /* LaunchScreen.storyboard */; };
+		7733475A20ED47AA0098C105 /* AppListingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7733475720ED47AA0098C105 /* AppListingViewController.swift */; };
+		7733476020ED4AFF0098C105 /* AppObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7733475F20ED4AFF0098C105 /* AppObject.swift */; };
+		7733476220ED4E0C0098C105 /* iTunesDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7733476120ED4E0C0098C105 /* iTunesDataSource.swift */; };
+		7733476420ED575E0098C105 /* PromiseErrors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7733476320ED575E0098C105 /* PromiseErrors.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		5AF7A609556D133C1B4BFA78 /* Pods-AppStoreRedesign.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AppStoreRedesign.release.xcconfig"; path = "Pods/Target Support Files/Pods-AppStoreRedesign/Pods-AppStoreRedesign.release.xcconfig"; sourceTree = "<group>"; };
 		7733474120ED42D70098C105 /* AppStoreRedesign.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AppStoreRedesign.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7733474420ED42D70098C105 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		7733474620ED42D70098C105 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		7733474920ED42D70098C105 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		7733474B20ED42D80098C105 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		7733474E20ED42D80098C105 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		7733475020ED42D80098C105 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		7733475720ED47AA0098C105 /* AppListingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppListingViewController.swift; sourceTree = "<group>"; };
+		7733475F20ED4AFF0098C105 /* AppObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppObject.swift; sourceTree = "<group>"; };
+		7733476120ED4E0C0098C105 /* iTunesDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iTunesDataSource.swift; sourceTree = "<group>"; };
+		7733476320ED575E0098C105 /* PromiseErrors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PromiseErrors.swift; sourceTree = "<group>"; };
 		88D2F33C0B71D57373BCCF72 /* Pods_AppStoreRedesign.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AppStoreRedesign.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FBA217B06717D43AAB9B2FF0 /* Pods-AppStoreRedesign.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AppStoreRedesign.debug.xcconfig"; path = "Pods/Target Support Files/Pods-AppStoreRedesign/Pods-AppStoreRedesign.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -78,14 +84,57 @@
 		7733474320ED42D70098C105 /* AppStoreRedesign */ = {
 			isa = PBXGroup;
 			children = (
+				7733475C20ED48E50098C105 /* DataSource */,
+				7733475820ED47AA0098C105 /* Model */,
+				7733475B20ED48A20098C105 /* Utility */,
+				7733475920ED47AA0098C105 /* View */,
+				7733475620ED47AA0098C105 /* ViewController */,
 				7733474420ED42D70098C105 /* AppDelegate.swift */,
-				7733474620ED42D70098C105 /* ViewController.swift */,
 				7733474820ED42D70098C105 /* Main.storyboard */,
 				7733474B20ED42D80098C105 /* Assets.xcassets */,
 				7733474D20ED42D80098C105 /* LaunchScreen.storyboard */,
 				7733475020ED42D80098C105 /* Info.plist */,
 			);
 			path = AppStoreRedesign;
+			sourceTree = "<group>";
+		};
+		7733475620ED47AA0098C105 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				7733475720ED47AA0098C105 /* AppListingViewController.swift */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		7733475820ED47AA0098C105 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				7733475F20ED4AFF0098C105 /* AppObject.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		7733475920ED47AA0098C105 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		7733475B20ED48A20098C105 /* Utility */ = {
+			isa = PBXGroup;
+			children = (
+				7733476320ED575E0098C105 /* PromiseErrors.swift */,
+			);
+			path = Utility;
+			sourceTree = "<group>";
+		};
+		7733475C20ED48E50098C105 /* DataSource */ = {
+			isa = PBXGroup;
+			children = (
+				7733476120ED4E0C0098C105 /* iTunesDataSource.swift */,
+			);
+			path = DataSource;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -182,9 +231,20 @@
 			files = (
 			);
 			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-AppStoreRedesign/Pods-AppStoreRedesign-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/PromiseKit/PromiseKit.framework",
+				"${BUILT_PRODUCTS_DIR}/Realm/Realm.framework",
+				"${BUILT_PRODUCTS_DIR}/RealmSwift/RealmSwift.framework",
+				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PromiseKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Realm.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RealmSwift.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -213,7 +273,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7733474720ED42D70098C105 /* ViewController.swift in Sources */,
+				7733476220ED4E0C0098C105 /* iTunesDataSource.swift in Sources */,
+				7733475A20ED47AA0098C105 /* AppListingViewController.swift in Sources */,
+				7733476020ED4AFF0098C105 /* AppObject.swift in Sources */,
+				7733476420ED575E0098C105 /* PromiseErrors.swift in Sources */,
 				7733474520ED42D70098C105 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

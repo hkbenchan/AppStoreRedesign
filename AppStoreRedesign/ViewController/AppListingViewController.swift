@@ -7,12 +7,19 @@
 //
 
 import UIKit
+import PromiseKit
 
-class ViewController: UIViewController {
+class AppListingViewController: UIViewController {
 
   override func viewDidLoad() {
     super.viewDidLoad()
     // Do any additional setup after loading the view, typically from a nib.
+    
+    iTunesDataSource.instance()?.topGrossingApplications().done { (apps: [AppObject]) -> Void in
+      for app: AppObject in apps {
+        print("app data received: \(app)")
+      }
+    }
   }
 
   override func didReceiveMemoryWarning() {

@@ -1,11 +1,14 @@
-# Uncomment the next line to define a global platform for your project
+source 'https://github.com/CocoaPods/Specs.git'
 platform :ios, '9.0'
 
 target 'AppStoreRedesign' do
-  # Comment the next line if you're not using Swift and don't want to use dynamic frameworks
-  use_frameworks!
+  use_frameworks! # we are using Swift, so use_framework is required
 
   # Pods for AppStoreRedesign
-
+  pod 'SwiftyJSON', '~> 4.1'
+  pod 'Alamofire', '~> 4.7'
+  pod 'PromiseKit', '~> 6.0'
+  pod 'PromiseKit/Alamofire', '~> 6.0'
+  pod 'RealmSwift', '~> 3.7'
 
 end
