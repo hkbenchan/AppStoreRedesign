@@ -12,6 +12,8 @@ import PromiseKit
 import SwiftyJSON
 
 fileprivate let HOST = "itunes.apple.com"
+fileprivate let TopGrossingApplicationSearchLimit = 10
+fileprivate let TopFreeApplicationSearchLimit = 100
 
 class iTunesDataSource {
   
@@ -62,7 +64,7 @@ class iTunesDataSource {
   
   public func topGrossingApplications() -> Promise<[AppObject]> {
     
-    let urlString = "https://\(HOST)/hk/rss/topgrossingapplications/limit=10/json"
+    let urlString = "https://\(HOST)/hk/rss/topgrossingapplications/limit=\(TopGrossingApplicationSearchLimit)/json"
     guard let url = try? urlString.asURL() else {
       return Promise(error: PromiseErrors.invalidUrl)
     }
@@ -71,7 +73,7 @@ class iTunesDataSource {
   }
   
   public func topFreeApplications() -> Promise<[AppObject] > {
-    let urlString = "https://\(HOST)/hk/rss/topfreeapplications/limit=100/json"
+    let urlString = "https://\(HOST)/hk/rss/topfreeapplications/limit=\(TopFreeApplicationSearchLimit)/json"
     guard let url = try? urlString.asURL() else {
       return Promise(error: PromiseErrors.invalidUrl)
     }
