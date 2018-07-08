@@ -16,6 +16,8 @@
 		7733476020ED4AFF0098C105 /* AppObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7733475F20ED4AFF0098C105 /* AppObject.swift */; };
 		7733476220ED4E0C0098C105 /* iTunesDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7733476120ED4E0C0098C105 /* iTunesDataSource.swift */; };
 		7733476420ED575E0098C105 /* PromiseErrors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7733476320ED575E0098C105 /* PromiseErrors.swift */; };
+		77A532F720EF772700C04A1D /* AppTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77A532F520EF772700C04A1D /* AppTableViewCell.swift */; };
+		77A532F820EF772700C04A1D /* AppTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 77A532F620EF772700C04A1D /* AppTableViewCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +32,8 @@
 		7733475F20ED4AFF0098C105 /* AppObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppObject.swift; sourceTree = "<group>"; };
 		7733476120ED4E0C0098C105 /* iTunesDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iTunesDataSource.swift; sourceTree = "<group>"; };
 		7733476320ED575E0098C105 /* PromiseErrors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PromiseErrors.swift; sourceTree = "<group>"; };
+		77A532F520EF772700C04A1D /* AppTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppTableViewCell.swift; sourceTree = "<group>"; };
+		77A532F620EF772700C04A1D /* AppTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AppTableViewCell.xib; sourceTree = "<group>"; };
 		88D2F33C0B71D57373BCCF72 /* Pods_AppStoreRedesign.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AppStoreRedesign.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FBA217B06717D43AAB9B2FF0 /* Pods-AppStoreRedesign.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AppStoreRedesign.debug.xcconfig"; path = "Pods/Target Support Files/Pods-AppStoreRedesign/Pods-AppStoreRedesign.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -117,6 +121,8 @@
 		7733475920ED47AA0098C105 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				77A532F520EF772700C04A1D /* AppTableViewCell.swift */,
+				77A532F620EF772700C04A1D /* AppTableViewCell.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -199,6 +205,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7733474F20ED42D80098C105 /* LaunchScreen.storyboard in Resources */,
+				77A532F820EF772700C04A1D /* AppTableViewCell.xib in Resources */,
 				7733474C20ED42D80098C105 /* Assets.xcassets in Resources */,
 				7733474A20ED42D70098C105 /* Main.storyboard in Resources */,
 			);
@@ -233,6 +240,7 @@
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-AppStoreRedesign/Pods-AppStoreRedesign-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/AlamofireImage/AlamofireImage.framework",
 				"${BUILT_PRODUCTS_DIR}/PromiseKit/PromiseKit.framework",
 				"${BUILT_PRODUCTS_DIR}/Realm/Realm.framework",
 				"${BUILT_PRODUCTS_DIR}/RealmSwift/RealmSwift.framework",
@@ -241,6 +249,7 @@
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AlamofireImage.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PromiseKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Realm.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RealmSwift.framework",
@@ -278,6 +287,7 @@
 				7733476020ED4AFF0098C105 /* AppObject.swift in Sources */,
 				7733476420ED575E0098C105 /* PromiseErrors.swift in Sources */,
 				7733474520ED42D70098C105 /* AppDelegate.swift in Sources */,
+				77A532F720EF772700C04A1D /* AppTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

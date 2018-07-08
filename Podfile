@@ -7,6 +7,7 @@ target 'AppStoreRedesign' do
   # Pods for AppStoreRedesign
   pod 'SwiftyJSON', '~> 4.1'
   pod 'Alamofire', '~> 4.7'
+  pod 'AlamofireImage', '~> 3.3'
   pod 'PromiseKit', '~> 6.0'
   pod 'PromiseKit/Alamofire', '~> 6.0'
   pod 'RealmSwift', '~> 3.7'
