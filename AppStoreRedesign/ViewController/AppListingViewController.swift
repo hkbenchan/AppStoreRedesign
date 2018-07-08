@@ -15,8 +15,11 @@ class AppListingViewController: UIViewController {
   @IBOutlet weak var searchBar: UISearchBar!
   @IBOutlet weak var appTableView: UITableView!
   
+  fileprivate var filterKeyword: String? = nil
+  
   // Top Grossing Apps
   fileprivate var topGrossingApps: [AppObject] = []
+  fileprivate var topGrossingAppsFiltered: [AppObject] = []
   
   // Top Free Apps
   
@@ -28,10 +31,11 @@ class AppListingViewController: UIViewController {
   fileprivate var loadedIdsCount: Int = 0
   
   fileprivate var topAppsWithDetails: [AppObject] = []
+  fileprivate var topAppsWithDetailsFiltered: [AppObject] = []
   
   private var isShowingGrossingAppSection: Bool {
     get {
-      return topGrossingApps.count > 0
+      return topGrossingAppsFiltered.count > 0
     }
   }
   
@@ -76,6 +80,7 @@ class AppListingViewController: UIViewController {
       ref.appTableView.beginUpdates()
       ref.topGrossingApps.removeAll()
       ref.topGrossingApps.append(contentsOf: apps)
+      ref.recomputeFilterList()
       ref.appTableView.insertRows(at: [IndexPath(row: 0, section: 0)], with: .automatic)
       ref.appTableView.endUpdates()
     }
@@ -111,7 +116,7 @@ class AppListingViewController: UIViewController {
       return // nothing to load
     }
     
-    var endIndex = topAppsWithDetails.count + AppListingViewController.topAppDetailFetchSize
+    var endIndex = loadedIdsCount + AppListingViewController.topAppDetailFetchSize
     
     if endIndex >= topAppIDs.count {
       endIndex = topAppIDs.count
@@ -136,22 +141,54 @@ class AppListingViewController: UIViewController {
       
       ref.appTableView?.beginUpdates()
       
-      let beginSize = ref.topAppsWithDetails.count
+      let beginSize = ref.topAppsWithDetailsFiltered.count
+      let isShowingGrossingBeforeRecompute = ref.isShowingGrossingAppSection
       ref.topAppsWithDetails.append(contentsOf: validApps)
-      let endingSize = ref.topAppsWithDetails.count
+      ref.recomputeFilterList()
+      let endingSize = ref.topAppsWithDetailsFiltered.count
+      let isShowingGrossingAfterRecompute = ref.isShowingGrossingAppSection
       
       var rows: [IndexPath] = []
       for i in beginSize..<endingSize {
-        rows.append(IndexPath(row: i + 1, section: 0))
+        rows.append(IndexPath(row: i + (isShowingGrossingAfterRecompute ? 1 : 0), section: 0))
       }
       ref.loadedIdsCount += AppListingViewController.topAppDetailFetchSize
       ref.appTableView?.insertRows(at: rows, with: .automatic)
-      
+      if isShowingGrossingBeforeRecompute && !isShowingGrossingAfterRecompute { // from showing to not showing
+        ref.appTableView?.deleteRows(at: [IndexPath(row: 0, section: 0)], with: .automatic)
+      } else if !isShowingGrossingBeforeRecompute && isShowingGrossingAfterRecompute { // from not showing to showing
+        ref.appTableView?.insertRows(at: [IndexPath(row: 0, section: 0)], with: .automatic)
+      }
       ref.appTableView?.endUpdates()
       ref.appTableView?.finishInfiniteScroll()
     }
   }
   
+  
+  private func recomputeFilterList(searchText: String? = nil) {
+    
+    if let text = searchText {
+      filterKeyword = text // update the keyword
+    }
+    
+    guard let text = filterKeyword?.lowercased(), text != "" else {
+      topGrossingAppsFiltered = Array(topGrossingApps)
+      topAppsWithDetailsFiltered = Array(topAppsWithDetails)
+      return
+    }
+    
+    let computeFunc: (AppObject) -> Bool = {
+      return $0.title?.lowercased().contains(text) ?? false ||
+        $0.appCategory?.lowercased().contains(text) ?? false ||
+        $0.author?.lowercased().contains(text) ?? false ||
+        $0.summary?.lowercased().contains(text) ?? false
+    }
+    
+    // recompute the list
+    topGrossingAppsFiltered = topGrossingApps.filter(computeFunc)
+    topAppsWithDetailsFiltered = topAppsWithDetails.filter(computeFunc)
+    
+  }
 }
 
 // MARK: extension - UITableViewDataSource
@@ -162,7 +199,7 @@ extension AppListingViewController: UITableViewDataSource {
   }
   
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    return topAppsWithDetails.count + (isShowingGrossingAppSection ? 1 : 0)
+    return topAppsWithDetailsFiltered.count + (isShowingGrossingAppSection ? 1 : 0)
   }
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -180,14 +217,14 @@ extension AppListingViewController: UITableViewDataSource {
     }
     let realRowNumber = isShowingGrossingAppSection ? indexPath.row - 1 : indexPath.row
     
-    guard realRowNumber < topAppsWithDetails.count else {
+    guard realRowNumber < topAppsWithDetailsFiltered.count else {
       return UITableViewCell()
     }
 
     guard let cell = tableView.dequeueReusableCell(withIdentifier: AppTableViewCell.identifier, for: indexPath) as? AppTableViewCell else {
       return UITableViewCell()
     }
-    let app = topAppsWithDetails[realRowNumber]
+    let app = topAppsWithDetailsFiltered[realRowNumber]
     
     cell.viewSetup(realRowNumber + 1, data: app) // we display data with 1-based
     
@@ -212,12 +249,12 @@ extension AppListingViewController: UITableViewDelegate {
 extension AppListingViewController: UICollectionViewDataSource {
   
   func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-    return topGrossingApps.count
+    return topGrossingAppsFiltered.count
   }
   
   func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
     
-    guard indexPath.item < topGrossingApps.count else {
+    guard indexPath.item < topGrossingAppsFiltered.count else {
       return UICollectionViewCell()
     }
     
@@ -225,7 +262,7 @@ extension AppListingViewController: UICollectionViewDataSource {
       return UICollectionViewCell()
     }
     
-    let app = topGrossingApps[indexPath.item]
+    let app = topGrossingAppsFiltered[indexPath.item]
     
     cell.viewSetup(data: app)
     
@@ -246,6 +283,12 @@ extension AppListingViewController: UISearchBarDelegate {
   
   public func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
     debugPrint("search text is changed to \(searchText)")
+    
+    self.recomputeFilterList(searchText: searchText)
+    self.appTableView?.reloadData()
   }
   
+  func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+    searchBar.resignFirstResponder()
+  }
 }

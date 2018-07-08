@@ -55,6 +55,13 @@ class AppObject: Object {
    LookupAPI: Map to genres.first
    */
   @objc dynamic var appCategory: String? = nil
+  
+  /**
+   RssFeed: Map to im:artist.label
+   
+   LookupAPI: Map to artistName
+   */
+  @objc dynamic var author: String? = nil
 
   // MARK: - Lookup API only property
   
@@ -127,6 +134,10 @@ extension AppObject {
       appObject.appCategory = attributesDict["label"]?.string
     }
     
+    if let imArtistDict = json["im:artist"].dictionary {
+      appObject.author = imArtistDict["label"]?.string
+    }
+    
     return appObject
   }
   
@@ -153,6 +164,10 @@ extension AppObject {
     
     if let url = json["artworkUrl100"].string {
       appObject.iconUrl = url
+    }
+    
+    if let author = json["artistName"].string {
+      appObject.author = author
     }
     
     if let rating = json["averageUserRating"].double {
