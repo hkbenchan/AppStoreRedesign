@@ -16,7 +16,7 @@ class AppListingViewController: UIViewController {
   @IBOutlet weak var appTableView: UITableView!
   
   // top application detail fetch size for each time
-  fileprivate static let topAppDetailFetchSize = 20
+  fileprivate static let topAppDetailFetchSize = 10
   
   // this is ready for fetching the ID only, not ready for display!
   fileprivate var topAppIDs: [String] = []
