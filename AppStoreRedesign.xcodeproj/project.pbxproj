@@ -16,6 +16,10 @@
 		7733476020ED4AFF0098C105 /* AppObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7733475F20ED4AFF0098C105 /* AppObject.swift */; };
 		7733476220ED4E0C0098C105 /* iTunesDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7733476120ED4E0C0098C105 /* iTunesDataSource.swift */; };
 		7733476420ED575E0098C105 /* PromiseErrors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7733476320ED575E0098C105 /* PromiseErrors.swift */; };
+		77860D2D20F25DBE002BF4B1 /* GrossingAppCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77860D2B20F25DBE002BF4B1 /* GrossingAppCollectionViewCell.swift */; };
+		77860D2E20F25DBE002BF4B1 /* GrossingAppCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 77860D2C20F25DBE002BF4B1 /* GrossingAppCollectionViewCell.xib */; };
+		77860D3120F26AB5002BF4B1 /* RecommendationSectionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77860D2F20F26AB5002BF4B1 /* RecommendationSectionTableViewCell.swift */; };
+		77860D3220F26AB5002BF4B1 /* RecommendationSectionTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 77860D3020F26AB5002BF4B1 /* RecommendationSectionTableViewCell.xib */; };
 		77A532F720EF772700C04A1D /* AppTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77A532F520EF772700C04A1D /* AppTableViewCell.swift */; };
 		77A532F820EF772700C04A1D /* AppTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 77A532F620EF772700C04A1D /* AppTableViewCell.xib */; };
 /* End PBXBuildFile section */
@@ -33,6 +37,10 @@
 		7733476120ED4E0C0098C105 /* iTunesDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iTunesDataSource.swift; sourceTree = "<group>"; };
 		7733476320ED575E0098C105 /* PromiseErrors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PromiseErrors.swift; sourceTree = "<group>"; };
 		77860D2A20F219D7002BF4B1 /* AppStoreRedesign-BridgingHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "AppStoreRedesign-BridgingHeader.h"; sourceTree = "<group>"; };
+		77860D2B20F25DBE002BF4B1 /* GrossingAppCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GrossingAppCollectionViewCell.swift; sourceTree = "<group>"; };
+		77860D2C20F25DBE002BF4B1 /* GrossingAppCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GrossingAppCollectionViewCell.xib; sourceTree = "<group>"; };
+		77860D2F20F26AB5002BF4B1 /* RecommendationSectionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendationSectionTableViewCell.swift; sourceTree = "<group>"; };
+		77860D3020F26AB5002BF4B1 /* RecommendationSectionTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RecommendationSectionTableViewCell.xib; sourceTree = "<group>"; };
 		77A532F520EF772700C04A1D /* AppTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppTableViewCell.swift; sourceTree = "<group>"; };
 		77A532F620EF772700C04A1D /* AppTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AppTableViewCell.xib; sourceTree = "<group>"; };
 		88D2F33C0B71D57373BCCF72 /* Pods_AppStoreRedesign.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AppStoreRedesign.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -125,6 +133,10 @@
 			children = (
 				77A532F520EF772700C04A1D /* AppTableViewCell.swift */,
 				77A532F620EF772700C04A1D /* AppTableViewCell.xib */,
+				77860D2B20F25DBE002BF4B1 /* GrossingAppCollectionViewCell.swift */,
+				77860D2C20F25DBE002BF4B1 /* GrossingAppCollectionViewCell.xib */,
+				77860D2F20F26AB5002BF4B1 /* RecommendationSectionTableViewCell.swift */,
+				77860D3020F26AB5002BF4B1 /* RecommendationSectionTableViewCell.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -206,7 +218,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				77860D2E20F25DBE002BF4B1 /* GrossingAppCollectionViewCell.xib in Resources */,
 				7733474F20ED42D80098C105 /* LaunchScreen.storyboard in Resources */,
+				77860D3220F26AB5002BF4B1 /* RecommendationSectionTableViewCell.xib in Resources */,
 				77A532F820EF772700C04A1D /* AppTableViewCell.xib in Resources */,
 				7733474C20ED42D80098C105 /* Assets.xcassets in Resources */,
 				7733474A20ED42D70098C105 /* Main.storyboard in Resources */,
@@ -286,11 +300,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				77860D3120F26AB5002BF4B1 /* RecommendationSectionTableViewCell.swift in Sources */,
 				7733476220ED4E0C0098C105 /* iTunesDataSource.swift in Sources */,
 				7733475A20ED47AA0098C105 /* AppListingViewController.swift in Sources */,
 				7733476020ED4AFF0098C105 /* AppObject.swift in Sources */,
 				7733476420ED575E0098C105 /* PromiseErrors.swift in Sources */,
 				7733474520ED42D70098C105 /* AppDelegate.swift in Sources */,
+				77860D2D20F25DBE002BF4B1 /* GrossingAppCollectionViewCell.swift in Sources */,
 				77A532F720EF772700C04A1D /* AppTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

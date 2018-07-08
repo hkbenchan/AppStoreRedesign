@@ -15,6 +15,11 @@ class AppListingViewController: UIViewController {
   @IBOutlet weak var searchBar: UISearchBar!
   @IBOutlet weak var appTableView: UITableView!
   
+  // Top Grossing Apps
+  fileprivate var topGrossingApps: [AppObject] = []
+  
+  // Top Free Apps
+  
   // top application detail fetch size for each time
   fileprivate static let topAppDetailFetchSize = 10
   
@@ -24,31 +29,26 @@ class AppListingViewController: UIViewController {
   
   fileprivate var topAppsWithDetails: [AppObject] = []
   
+  private var isShowingGrossingAppSection: Bool {
+    get {
+      return topGrossingApps.count > 0
+    }
+  }
   
   override func viewDidLoad() {
     super.viewDidLoad()
     // Do any additional setup after loading the view, typically from a nib.
     
     // we will get the app ids first
-    let _ = iTunesDataSource.instance()?.topFreeApplications().done(on: DispatchQueue.main) { [weak self] (apps: [AppObject]) -> Void in
-      guard let ref = self else {
-        return
-      }
-      
-      ref.topAppIDs.removeAll()
-      
-      let appIDs = apps.map({ $0.appId }).compactMap {$0}
-      
-      ref.loadedIdsCount = 0
-      ref.topAppIDs.append(contentsOf: appIDs)
-      
-      ref.loadMore()
-    }
+    self.loadDataFromSource()
     
     // bind the table view cell using nib file here
-    let appTableViewCellNib = UINib(nibName: "AppTableViewCell", bundle: Bundle.main)
+    let appTableViewCellNib = UINib(nibName: AppTableViewCell.identifier, bundle: Bundle.main)
     appTableView?.register(appTableViewCellNib, forCellReuseIdentifier: AppTableViewCell.identifier)
-
+    
+    let recommendationViewCellNib = UINib(nibName: RecommendationSectionTableViewCell.identifier, bundle: Bundle.main)
+    appTableView?.register(recommendationViewCellNib, forCellReuseIdentifier: RecommendationSectionTableViewCell.identifier)
+    
     appTableView?.addInfiniteScroll { [weak self] _ in
       guard let ref = self else {
         return
@@ -65,6 +65,38 @@ class AppListingViewController: UIViewController {
     // Dispose of any resources that can be recreated.
   }
 
+  private func loadDataFromSource() {
+    // top grossing apps
+    let _ = iTunesDataSource.instance()?.topGrossingApplications().done(on: DispatchQueue.main) { [weak self] (apps: [AppObject]) -> Void in
+      
+      guard let ref = self else {
+        return
+      }
+      
+      ref.appTableView.beginUpdates()
+      ref.topGrossingApps.removeAll()
+      ref.topGrossingApps.append(contentsOf: apps)
+      ref.appTableView.insertRows(at: [IndexPath(row: 0, section: 0)], with: .automatic)
+      ref.appTableView.endUpdates()
+    }
+    
+    
+    // top free apps
+    let _ = iTunesDataSource.instance()?.topFreeApplications().done(on: DispatchQueue.main) { [weak self] (apps: [AppObject]) -> Void in
+      guard let ref = self else {
+        return
+      }
+      
+      ref.topAppIDs.removeAll()
+      
+      let appIDs = apps.map({ $0.appId }).compactMap {$0}
+      
+      ref.loadedIdsCount = 0
+      ref.topAppIDs.append(contentsOf: appIDs)
+      
+      ref.loadMore()
+    }
+  }
   
   private func loadMore() {
     
@@ -110,7 +142,7 @@ class AppListingViewController: UIViewController {
       
       var rows: [IndexPath] = []
       for i in beginSize..<endingSize {
-        rows.append(IndexPath(row: i, section: 0))
+        rows.append(IndexPath(row: i + 1, section: 0))
       }
       ref.loadedIdsCount += AppListingViewController.topAppDetailFetchSize
       ref.appTableView?.insertRows(at: rows, with: .automatic)
@@ -130,20 +162,34 @@ extension AppListingViewController: UITableViewDataSource {
   }
   
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    return topAppsWithDetails.count
+    return topAppsWithDetails.count + (isShowingGrossingAppSection ? 1 : 0)
   }
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    guard indexPath.row < topAppsWithDetails.count else {
+    if isShowingGrossingAppSection && indexPath.row == 0 {
+      guard let cell = tableView.dequeueReusableCell(withIdentifier: RecommendationSectionTableViewCell.identifier, for: indexPath) as? RecommendationSectionTableViewCell else {
+        return UITableViewCell()
+      }
+      
+      let nib = UINib(nibName: GrossingAppCollectionViewCell.identifier, bundle: Bundle.main)
+      
+      cell.registerCollectionViewNib(nib: nib, forCellWithReuseIdentifier: GrossingAppCollectionViewCell.identifier)
+      cell.setCollectionViewDelegate(dataSourceDelegate: self)
+      
+      return cell
+    }
+    let realRowNumber = isShowingGrossingAppSection ? indexPath.row - 1 : indexPath.row
+    
+    guard realRowNumber < topAppsWithDetails.count else {
       return UITableViewCell()
     }
 
     guard let cell = tableView.dequeueReusableCell(withIdentifier: AppTableViewCell.identifier, for: indexPath) as? AppTableViewCell else {
       return UITableViewCell()
     }
-    let app = topAppsWithDetails[indexPath.row]
+    let app = topAppsWithDetails[realRowNumber]
     
-    cell.viewSetup(indexPath.row + 1, data: app) // we display data with 1-based
+    cell.viewSetup(realRowNumber + 1, data: app) // we display data with 1-based
     
     return cell
   }
@@ -154,8 +200,44 @@ extension AppListingViewController: UITableViewDataSource {
 extension AppListingViewController: UITableViewDelegate {
   
   func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+    if isShowingGrossingAppSection && indexPath.row == 0 {
+      return 180
+    }
     return 94 // hard set the height
   }
+  
+}
+
+// MARK: extension - UICollectionViewDataSource
+extension AppListingViewController: UICollectionViewDataSource {
+  
+  func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    return topGrossingApps.count
+  }
+  
+  func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+    
+    guard indexPath.item < topGrossingApps.count else {
+      return UICollectionViewCell()
+    }
+    
+    guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: GrossingAppCollectionViewCell.identifier, for: indexPath) as? GrossingAppCollectionViewCell else {
+      return UICollectionViewCell()
+    }
+    
+    let app = topGrossingApps[indexPath.item]
+    
+    cell.viewSetup(data: app)
+    
+    return cell
+  }
+  
+}
+
+// MARK: extension - UICollectionViewDelegate
+extension AppListingViewController: UICollectionViewDelegate {
+  
+  
   
 }
 
