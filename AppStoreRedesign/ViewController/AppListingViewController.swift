@@ -16,10 +16,11 @@ class AppListingViewController: UIViewController {
   @IBOutlet weak var appTableView: UITableView!
   
   // top application detail fetch size for each time
-  fileprivate static let topAppDetailFetchSize = 10
+  fileprivate static let topAppDetailFetchSize = 20
   
   // this is ready for fetching the ID only, not ready for display!
   fileprivate var topAppIDs: [String] = []
+  fileprivate var loadedIdsCount: Int = 0
   
   fileprivate var topAppsWithDetails: [AppObject] = []
   
@@ -28,6 +29,7 @@ class AppListingViewController: UIViewController {
     super.viewDidLoad()
     // Do any additional setup after loading the view, typically from a nib.
     
+    // we will get the app ids first
     let _ = iTunesDataSource.instance()?.topFreeApplications().done(on: DispatchQueue.main) { [weak self] (apps: [AppObject]) -> Void in
       guard let ref = self else {
         return
@@ -37,6 +39,7 @@ class AppListingViewController: UIViewController {
       
       let appIDs = apps.map({ $0.appId }).compactMap {$0}
       
+      ref.loadedIdsCount = 0
       ref.topAppIDs.append(contentsOf: appIDs)
       
       ref.loadMore()
@@ -46,6 +49,15 @@ class AppListingViewController: UIViewController {
     let appTableViewCellNib = UINib(nibName: "AppTableViewCell", bundle: Bundle.main)
     appTableView?.register(appTableViewCellNib, forCellReuseIdentifier: AppTableViewCell.identifier)
 
+    appTableView?.addInfiniteScroll { [weak self] _ in
+      guard let ref = self else {
+        return
+      }
+      ref.loadMore()
+    }
+    appTableView?.setShouldShowInfiniteScrollHandler { _ -> Bool in
+      return false
+    }
   }
 
   override func didReceiveMemoryWarning() {
@@ -56,15 +68,21 @@ class AppListingViewController: UIViewController {
   
   private func loadMore() {
     
-    let startIndex = topAppsWithDetails.count
+    let startIndex = loadedIdsCount
     
     if startIndex >= topAppIDs.count {
+      // no more data to load, stop infinite scrolling
+      appTableView?.setShouldShowInfiniteScrollHandler { _ -> Bool in
+        return false
+      }
+      appTableView?.finishInfiniteScroll()
       return // nothing to load
     }
+    
     var endIndex = topAppsWithDetails.count + AppListingViewController.topAppDetailFetchSize
     
     if endIndex >= topAppIDs.count {
-      endIndex = topAppIDs.count - 1
+      endIndex = topAppIDs.count
     }
     
     let appIDsToLoad = topAppIDs[
@@ -79,8 +97,26 @@ class AppListingViewController: UIViewController {
         return
       }
       
+      // enable load more features
+      ref.appTableView?.setShouldShowInfiniteScrollHandler { _ -> Bool in
+        return true
+      }
+      
+      ref.appTableView?.beginUpdates()
+      
+      let beginSize = ref.topAppsWithDetails.count
       ref.topAppsWithDetails.append(contentsOf: validApps)
-      ref.appTableView?.reloadData()
+      let endingSize = ref.topAppsWithDetails.count
+      
+      var rows: [IndexPath] = []
+      for i in beginSize..<endingSize {
+        rows.append(IndexPath(row: i, section: 0))
+      }
+      ref.loadedIdsCount += AppListingViewController.topAppDetailFetchSize
+      ref.appTableView?.insertRows(at: rows, with: .automatic)
+      
+      ref.appTableView?.endUpdates()
+      ref.appTableView?.finishInfiniteScroll()
     }
   }
   

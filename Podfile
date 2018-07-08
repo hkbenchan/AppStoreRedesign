@@ -11,5 +11,5 @@ target 'AppStoreRedesign' do
   pod 'PromiseKit', '~> 6.0'
   pod 'PromiseKit/Alamofire', '~> 6.0'
   pod 'RealmSwift', '~> 3.7'
-
+  pod 'UIScrollView-InfiniteScroll', '~> 1.1'
 end

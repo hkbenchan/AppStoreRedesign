@@ -32,6 +32,7 @@
 		7733475F20ED4AFF0098C105 /* AppObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppObject.swift; sourceTree = "<group>"; };
 		7733476120ED4E0C0098C105 /* iTunesDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iTunesDataSource.swift; sourceTree = "<group>"; };
 		7733476320ED575E0098C105 /* PromiseErrors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PromiseErrors.swift; sourceTree = "<group>"; };
+		77860D2A20F219D7002BF4B1 /* AppStoreRedesign-BridgingHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "AppStoreRedesign-BridgingHeader.h"; sourceTree = "<group>"; };
 		77A532F520EF772700C04A1D /* AppTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppTableViewCell.swift; sourceTree = "<group>"; };
 		77A532F620EF772700C04A1D /* AppTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AppTableViewCell.xib; sourceTree = "<group>"; };
 		88D2F33C0B71D57373BCCF72 /* Pods_AppStoreRedesign.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AppStoreRedesign.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -98,6 +99,7 @@
 				7733474B20ED42D80098C105 /* Assets.xcassets */,
 				7733474D20ED42D80098C105 /* LaunchScreen.storyboard */,
 				7733475020ED42D80098C105 /* Info.plist */,
+				77860D2A20F219D7002BF4B1 /* AppStoreRedesign-BridgingHeader.h */,
 			);
 			path = AppStoreRedesign;
 			sourceTree = "<group>";
@@ -245,6 +247,7 @@
 				"${BUILT_PRODUCTS_DIR}/Realm/Realm.framework",
 				"${BUILT_PRODUCTS_DIR}/RealmSwift/RealmSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
+				"${BUILT_PRODUCTS_DIR}/UIScrollView-InfiniteScroll/UIScrollView_InfiniteScroll.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
@@ -254,6 +257,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Realm.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RealmSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/UIScrollView_InfiniteScroll.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -442,6 +446,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = me.hpchan.AppStoreRedesign;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "${SRCROOT}/AppStoreRedesign/AppStoreRedesign-BridgingHeader.h";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -462,6 +467,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = me.hpchan.AppStoreRedesign;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "${SRCROOT}/AppStoreRedesign/AppStoreRedesign-BridgingHeader.h";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
