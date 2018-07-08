@@ -126,7 +126,7 @@ class AppListingViewController: UIViewController {
       startIndex..<endIndex
     ]
     
-    let _ = iTunesDataSource.instance()?.fetchAppInfo(appIDs: Array(appIDsToLoad)).done(on: DispatchQueue.main) { [weak self] (apps: [AppObject?]) in
+    let _ = iTunesDataSource.instance()?.fetchAppInfo(appIds: Array(appIDsToLoad)).done(on: DispatchQueue.main) { [weak self] (apps: [AppObject?]) in
       
       let validApps = apps.compactMap { $0 }
       

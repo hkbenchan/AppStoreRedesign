@@ -20,6 +20,8 @@
 		77860D2E20F25DBE002BF4B1 /* GrossingAppCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 77860D2C20F25DBE002BF4B1 /* GrossingAppCollectionViewCell.xib */; };
 		77860D3120F26AB5002BF4B1 /* RecommendationSectionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77860D2F20F26AB5002BF4B1 /* RecommendationSectionTableViewCell.swift */; };
 		77860D3220F26AB5002BF4B1 /* RecommendationSectionTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 77860D3020F26AB5002BF4B1 /* RecommendationSectionTableViewCell.xib */; };
+		77860D3B20F291EB002BF4B1 /* RealmDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77860D3A20F291EB002BF4B1 /* RealmDataSource.swift */; };
+		77860D3D20F29546002BF4B1 /* TopGrossingApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77860D3C20F29546002BF4B1 /* TopGrossingApp.swift */; };
 		77A532F720EF772700C04A1D /* AppTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77A532F520EF772700C04A1D /* AppTableViewCell.swift */; };
 		77A532F820EF772700C04A1D /* AppTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 77A532F620EF772700C04A1D /* AppTableViewCell.xib */; };
 /* End PBXBuildFile section */
@@ -41,6 +43,8 @@
 		77860D2C20F25DBE002BF4B1 /* GrossingAppCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GrossingAppCollectionViewCell.xib; sourceTree = "<group>"; };
 		77860D2F20F26AB5002BF4B1 /* RecommendationSectionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendationSectionTableViewCell.swift; sourceTree = "<group>"; };
 		77860D3020F26AB5002BF4B1 /* RecommendationSectionTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RecommendationSectionTableViewCell.xib; sourceTree = "<group>"; };
+		77860D3A20F291EB002BF4B1 /* RealmDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RealmDataSource.swift; sourceTree = "<group>"; };
+		77860D3C20F29546002BF4B1 /* TopGrossingApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopGrossingApp.swift; sourceTree = "<group>"; };
 		77A532F520EF772700C04A1D /* AppTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppTableViewCell.swift; sourceTree = "<group>"; };
 		77A532F620EF772700C04A1D /* AppTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AppTableViewCell.xib; sourceTree = "<group>"; };
 		88D2F33C0B71D57373BCCF72 /* Pods_AppStoreRedesign.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AppStoreRedesign.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -124,6 +128,7 @@
 			isa = PBXGroup;
 			children = (
 				7733475F20ED4AFF0098C105 /* AppObject.swift */,
+				77860D3C20F29546002BF4B1 /* TopGrossingApp.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -153,6 +158,7 @@
 			isa = PBXGroup;
 			children = (
 				7733476120ED4E0C0098C105 /* iTunesDataSource.swift */,
+				77860D3A20F291EB002BF4B1 /* RealmDataSource.swift */,
 			);
 			path = DataSource;
 			sourceTree = "<group>";
@@ -301,6 +307,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				77860D3120F26AB5002BF4B1 /* RecommendationSectionTableViewCell.swift in Sources */,
+				77860D3D20F29546002BF4B1 /* TopGrossingApp.swift in Sources */,
+				77860D3B20F291EB002BF4B1 /* RealmDataSource.swift in Sources */,
 				7733476220ED4E0C0098C105 /* iTunesDataSource.swift in Sources */,
 				7733475A20ED47AA0098C105 /* AppListingViewController.swift in Sources */,
 				7733476020ED4AFF0098C105 /* AppObject.swift in Sources */,

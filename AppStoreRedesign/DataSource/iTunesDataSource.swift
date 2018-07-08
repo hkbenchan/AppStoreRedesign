@@ -69,7 +69,15 @@ class iTunesDataSource {
       return Promise(error: PromiseErrors.invalidUrl)
     }
     
-    return fetchApplicationList(onURL: url)
+    return fetchApplicationList(onURL: url).then { (apps: [AppObject]) -> Promise<[AppObject]> in
+      
+      // save the data into Realm
+      RealmDataSource.instance().saveTopGrossingApplications(apps: apps)
+      
+      return Promise.value(apps)
+    }.recover { (err: Error) -> Promise<[AppObject]> in
+      return RealmDataSource.instance().topGrossingApplications()
+    }
   }
   
   public func topFreeApplications() -> Promise<[AppObject] > {
@@ -106,12 +114,12 @@ class iTunesDataSource {
    
    Any invalid AppID will result in a nil object in the array
    */
-  public func fetchAppInfo(appIDs: [String]) -> Promise<[AppObject?]> {
+  public func fetchAppInfo(appIds: [String]) -> Promise<[AppObject?]> {
     
     let urlString = "https://\(HOST)/hk/lookup"
     
     var components = URLComponents(string: urlString)
-    components?.queryItems = [ URLQueryItem(name: "id", value: appIDs.joined(separator: ",")) ]
+    components?.queryItems = [ URLQueryItem(name: "id", value: appIds.joined(separator: ",")) ]
     
     guard let url = components?.url else {
       return Promise(error: PromiseErrors.invalidUrl)
@@ -130,13 +138,15 @@ class iTunesDataSource {
           apps.append(app)
         }
       }
-      
+      RealmDataSource.instance().saveAppObjects(apps: apps)
       return Promise.value(apps)
     }.then { (apps: [AppObject]) -> Promise<[AppObject?]> in
-      let sorted = appIDs.map { appId in
+      let sorted = appIds.map { appId in
         return apps.first { $0.appId == appId }
       }
       return Promise.value(sorted)
+    }.recover { (err: Error) -> Promise<[AppObject?]> in
+      return RealmDataSource.instance().loadAppsDetail(appIds: appIds)
     }
     
   }

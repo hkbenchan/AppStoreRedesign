@@ -74,6 +74,10 @@ class AppObject: Object {
    LookupAPI: Map to userRatingCount
    */
   @objc dynamic var ratingCount: Int = 0
+  
+  override static func primaryKey() -> String? {
+    return "appId"
+  }
 }
 
 /**
@@ -144,7 +148,7 @@ extension AppObject {
   private static func parseLookupAPI(json: JSON) -> AppObject {
     
     let appObject = AppObject()
-    appObject.source = iTunesDataSource.DataSource.RssFeed.rawValue
+    appObject.source = iTunesDataSource.DataSource.LookupAPI.rawValue
     
     if let appId = json["trackId"].number {
       appObject.appId = appId.stringValue
