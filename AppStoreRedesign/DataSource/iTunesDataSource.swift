@@ -48,7 +48,6 @@ class iTunesDataSource {
       iTunesDataSource.reachabilityManager = NetworkReachabilityManager(host: HOST)
       iTunesDataSource.reachabilityManager?.listener = { status in
         debugPrint("Network status changed: \(status)")
-        // TODO: send notification to notify the network status change
         if status == NetworkReachabilityManager.NetworkReachabilityStatus.notReachable {
           NotificationCenter.default.post(name: AppNotification.NoInternetOrSlowInternetNotification, object: nil)
         }
