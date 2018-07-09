@@ -29,6 +29,8 @@ class AppTableViewCell: UITableViewCell {
     // Initialization code
     self.tintColor = UIColor(red: 255.0/255, green: 127.0/255, blue: 0, alpha: 1)
     self.ratingImageViews?.forEach { $0.tintColor = self.tintColor }
+    
+    self.selectionStyle = .none
   }
   
   override func setSelected(_ selected: Bool, animated: Bool) {

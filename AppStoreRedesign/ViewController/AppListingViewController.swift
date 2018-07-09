@@ -289,6 +289,10 @@ extension AppListingViewController: UITableViewDelegate {
     return 94 // hard set the height
   }
   
+  func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    searchBar?.resignFirstResponder()
+  }
+  
 }
 
 // MARK: extension - UICollectionViewDataSource
