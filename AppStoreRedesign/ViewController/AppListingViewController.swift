@@ -14,6 +14,9 @@ class AppListingViewController: UIViewController {
   // IBOutlets
   @IBOutlet weak var searchBar: UISearchBar!
   @IBOutlet weak var appTableView: UITableView!
+  @IBOutlet weak var noInternetView: UIView!
+  
+  fileprivate var noInternetViewAnimating: Bool = false
   
   fileprivate var filterKeyword: String? = nil
   
@@ -67,6 +70,18 @@ class AppListingViewController: UIViewController {
   override func didReceiveMemoryWarning() {
     super.didReceiveMemoryWarning()
     // Dispose of any resources that can be recreated.
+  }
+  
+  override func viewDidAppear(_ animated: Bool) {
+    super.viewDidAppear(animated)
+    
+    NotificationCenter.default.addObserver(self, selector: #selector(self.showNoOrSlowInternetBanner), name: AppNotification.NoInternetOrSlowInternetNotification, object: nil)
+  }
+  
+  override func viewWillDisappear(_ animated: Bool) {
+    super.viewWillDisappear(animated)
+    
+    NotificationCenter.default.removeObserver(self, name: AppNotification.NoInternetOrSlowInternetNotification, object: nil)
   }
 
   private func loadDataFromSource() {
@@ -188,6 +203,37 @@ class AppListingViewController: UIViewController {
     topGrossingAppsFiltered = topGrossingApps.filter(computeFunc)
     topAppsWithDetailsFiltered = topAppsWithDetails.filter(computeFunc)
     
+  }
+  
+  @objc func showNoOrSlowInternetBanner() {
+    
+    guard !noInternetViewAnimating else {
+      return
+    }
+    
+    noInternetViewAnimating = true
+    
+    let beginTransform = CGAffineTransform(translationX: 0, y: -noInternetView.frame.height)
+    
+    // reset the starting position
+    noInternetView.alpha = 0.0
+    noInternetView.transform = beginTransform
+    
+    firstly {
+      UIView.animate(.promise, duration: 0.5) { [weak self] in
+        self?.noInternetView.alpha = 1.0
+        self?.noInternetView.transform = CGAffineTransform.identity
+      }
+    }.then { _ in
+      after(.seconds(2))
+    }.then { [weak self] _ in
+      UIView.animate(.promise, duration: 0.5) { [weak self] in
+        self?.noInternetView.alpha = 0.0
+        self?.noInternetView.transform = beginTransform
+      }
+    }.done { [weak self] _ in
+      self?.noInternetViewAnimating = false
+    }
   }
 }
 

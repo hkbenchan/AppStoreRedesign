@@ -49,6 +49,9 @@ class iTunesDataSource {
       iTunesDataSource.reachabilityManager?.listener = { status in
         debugPrint("Network status changed: \(status)")
         // TODO: send notification to notify the network status change
+        if status == NetworkReachabilityManager.NetworkReachabilityStatus.notReachable {
+          NotificationCenter.default.post(name: AppNotification.NoInternetOrSlowInternetNotification, object: nil)
+        }
       }
       iTunesDataSource.reachabilityManager?.startListening()
     }
@@ -75,7 +78,8 @@ class iTunesDataSource {
       RealmDataSource.instance().saveTopGrossingApplications(apps: apps)
       
       return Promise.value(apps)
-    }.recover { (err: Error) -> Promise<[AppObject]> in
+    }.recover { [weak self] (err: Error) -> Promise<[AppObject]> in
+      self?.processError(err: err)
       return RealmDataSource.instance().topGrossingApplications()
     }
   }
@@ -145,10 +149,29 @@ class iTunesDataSource {
         return apps.first { $0.appId == appId }
       }
       return Promise.value(sorted)
-    }.recover { (err: Error) -> Promise<[AppObject?]> in
+    }.recover { [weak self] (err: Error) -> Promise<[AppObject?]> in
+      self?.processError(err: err)
       return RealmDataSource.instance().loadAppsDetail(appIds: appIds)
     }
     
+  }
+  
+  private func processError(err: Error) {
+    let error = err as NSError
+    if error.domain == URLError.errorDomain {
+      switch (error.code) {
+      case URLError.notConnectedToInternet.rawValue,
+           URLError.cannotFindHost.rawValue,
+           URLError.cannotLoadFromNetwork.rawValue,
+           URLError.timedOut.rawValue,
+           URLError.networkConnectionLost.rawValue:
+        NotificationCenter.default.post(name: AppNotification.NoInternetOrSlowInternetNotification, object: nil)
+        break
+      default:
+        break
+      }
+      
+    }
   }
   
   deinit {

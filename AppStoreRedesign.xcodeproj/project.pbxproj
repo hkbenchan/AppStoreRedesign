@@ -24,6 +24,7 @@
 		77860D3D20F29546002BF4B1 /* TopGrossingApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77860D3C20F29546002BF4B1 /* TopGrossingApp.swift */; };
 		77A532F720EF772700C04A1D /* AppTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77A532F520EF772700C04A1D /* AppTableViewCell.swift */; };
 		77A532F820EF772700C04A1D /* AppTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 77A532F620EF772700C04A1D /* AppTableViewCell.xib */; };
+		77BA650E20F3AE65002633E6 /* AppNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77BA650D20F3AE65002633E6 /* AppNotification.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -47,6 +48,7 @@
 		77860D3C20F29546002BF4B1 /* TopGrossingApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopGrossingApp.swift; sourceTree = "<group>"; };
 		77A532F520EF772700C04A1D /* AppTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppTableViewCell.swift; sourceTree = "<group>"; };
 		77A532F620EF772700C04A1D /* AppTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AppTableViewCell.xib; sourceTree = "<group>"; };
+		77BA650D20F3AE65002633E6 /* AppNotification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppNotification.swift; sourceTree = "<group>"; };
 		88D2F33C0B71D57373BCCF72 /* Pods_AppStoreRedesign.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AppStoreRedesign.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FBA217B06717D43AAB9B2FF0 /* Pods-AppStoreRedesign.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AppStoreRedesign.debug.xcconfig"; path = "Pods/Target Support Files/Pods-AppStoreRedesign/Pods-AppStoreRedesign.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -150,6 +152,7 @@
 			isa = PBXGroup;
 			children = (
 				7733476320ED575E0098C105 /* PromiseErrors.swift */,
+				77BA650D20F3AE65002633E6 /* AppNotification.swift */,
 			);
 			path = Utility;
 			sourceTree = "<group>";
@@ -310,6 +313,7 @@
 				77860D3D20F29546002BF4B1 /* TopGrossingApp.swift in Sources */,
 				77860D3B20F291EB002BF4B1 /* RealmDataSource.swift in Sources */,
 				7733476220ED4E0C0098C105 /* iTunesDataSource.swift in Sources */,
+				77BA650E20F3AE65002633E6 /* AppNotification.swift in Sources */,
 				7733475A20ED47AA0098C105 /* AppListingViewController.swift in Sources */,
 				7733476020ED4AFF0098C105 /* AppObject.swift in Sources */,
 				7733476420ED575E0098C105 /* PromiseErrors.swift in Sources */,

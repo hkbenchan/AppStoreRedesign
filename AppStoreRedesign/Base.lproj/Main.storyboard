@@ -36,6 +36,24 @@
                                     <outlet property="delegate" destination="BYZ-38-t0r" id="DwN-ll-CdG"/>
                                 </connections>
                             </tableView>
+                            <view alpha="0.0" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Uks-Ir-1OT">
+                                <rect key="frame" x="0.0" y="20" width="375" height="60"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No or slow internet connection" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EUD-ck-BKq">
+                                        <rect key="frame" x="8" y="18" width="359" height="24"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" red="1" green="0.14092339409722221" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstItem="EUD-ck-BKq" firstAttribute="leading" secondItem="Uks-Ir-1OT" secondAttribute="leading" constant="8" id="Af9-F3-t7g"/>
+                                    <constraint firstAttribute="trailing" secondItem="EUD-ck-BKq" secondAttribute="trailing" constant="8" id="TV4-Bx-P25"/>
+                                    <constraint firstItem="EUD-ck-BKq" firstAttribute="centerY" secondItem="Uks-Ir-1OT" secondAttribute="centerY" id="rDi-K3-ana"/>
+                                    <constraint firstAttribute="height" constant="60" id="w6y-wK-G1O"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
@@ -43,7 +61,10 @@
                             <constraint firstItem="D89-YY-mAG" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="74g-pX-Djb"/>
                             <constraint firstItem="oq2-TY-nwF" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="AFJ-ZT-aDQ"/>
                             <constraint firstItem="oq2-TY-nwF" firstAttribute="top" secondItem="D89-YY-mAG" secondAttribute="bottom" id="G1C-cC-LqJ"/>
+                            <constraint firstItem="Uks-Ir-1OT" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="OBJ-wi-a6i"/>
+                            <constraint firstItem="Uks-Ir-1OT" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="XUt-0c-sUW"/>
                             <constraint firstItem="oq2-TY-nwF" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="Zlv-6y-5n0"/>
+                            <constraint firstItem="Uks-Ir-1OT" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="hpU-jp-wyD"/>
                             <constraint firstItem="D89-YY-mAG" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="obV-mI-inJ"/>
                             <constraint firstItem="oq2-TY-nwF" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="rrp-iK-cRw"/>
                         </constraints>
@@ -51,6 +72,7 @@
                     </view>
                     <connections>
                         <outlet property="appTableView" destination="oq2-TY-nwF" id="0Xe-KU-S5A"/>
+                        <outlet property="noInternetView" destination="Uks-Ir-1OT" id="HEo-U0-e1s"/>
                         <outlet property="searchBar" destination="D89-YY-mAG" id="gp3-Dh-Rpm"/>
                     </connections>
                 </viewController>
