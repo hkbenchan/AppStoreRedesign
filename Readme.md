@@ -34,29 +34,29 @@ All listed dependencies should be installed.
 ### Data Source
 
 1. iTunes RSS Feed
-  1. https://itunes.apple.com/hk/rss/topfreeapplications/limit=100/json​​
-  1. https://itunes.apple.com/hk/rss/topgrossingapplications/limit=10/json​​
+    1. https://itunes.apple.com/hk/rss/topfreeapplications/limit=100/json​​
+    1. https://itunes.apple.com/hk/rss/topgrossingapplications/limit=10/json​​
 
 1. iTunes Lookup API
-  1. https://itunes.apple.com/hk/lookup?id={id}
+    1. https://itunes.apple.com/hk/lookup?id={id}
 
 ### Caching layer explained
 
 1. API Caching - Grossing Apps
 
-  The RSS feed of top grossing applications are parsed and write to the disk - managed by `Realm`. Information of apps positioning and parsed app details are also written (cached) to the disk by `Realm`.
+    The RSS feed of top grossing applications are parsed and write to the disk - managed by `Realm`. Information of apps positioning and parsed app details are also written (cached) to the disk by `Realm`.
 
-  If loading the top grossing applications RSS feed failed (e.g. network error, no internet connection) and system level cache (`NSURLCache`) is not available, the app will load the cached info from `Realm`, together with the application details.
+    If loading the top grossing applications RSS feed failed (e.g. network error, no internet connection) and system level cache (`NSURLCache`) is not available, the app will load the cached info from `Realm`, together with the application details.
 
 1. API Caching - Free Apps
 
-  The RSS feed of top free applications are parsed and use the ID to query the lookup API (10 IDs at a time). The result from the lookup API are parsed and write to the disk - managed by `Realm`.
+    The RSS feed of top free applications are parsed and use the ID to query the lookup API (10 IDs at a time). The result from the lookup API are parsed and write to the disk - managed by `Realm`.
 
-  If loading the top free applications details failed (e.g. network error, no internet connection) and system level cache (`NSURLCache`) is not available, the app will load the cached app detail from `Realm`.
+    If loading the top free applications details failed (e.g. network error, no internet connection) and system level cache (`NSURLCache`) is not available, the app will load the cached app detail from `Realm`.
 
 1. Photo Caching
 
-  Photo caching is auto managed by the `AlamofireImage`. Firstly, it will be cached in the system level (`NSURLCache`) and it will be also cached in memory level (by `AlamofireImage`). The image removal order is by LRU (least recent used).
+    Photo caching is auto managed by the `AlamofireImage`. Firstly, it will be cached in the system level (`NSURLCache`) and it will be also cached in memory level (by `AlamofireImage`). The image removal order is by LRU (least recent used).
 
 
 ### Possible features
